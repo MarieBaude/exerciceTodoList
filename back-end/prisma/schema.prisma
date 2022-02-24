@@ -1,0 +1,17 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model List {
+    id          Int         @id @default(autoincrement())
+    content     String
+    category    Category    @relation(fields: [categoryId], references: [id])
+    categoryId  Int         
+}
+
+model Category {
+    id          Int         @id @default(autoincrement())
+    name        String      @db.VarChar(50)
+    list        List?        
+}
