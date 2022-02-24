@@ -8,14 +8,16 @@ datasource db {
 }
 
 model List {
-    id          Int         @id @default(autoincrement())
-    content     String
-    category    Category    @relation(fields: [categoryId], references: [id])
-    categoryId  Int         
+    id Int @id @default(autoincrement())
+    name String
+    description String
+    cathegory Cathegory @relation(fields: [cathegoryId], references: [id])
+    cathegoryId Int @unique
 }
 
-model Category {
-    id          Int         @id @default(autoincrement())
-    name        String      @db.VarChar(50)
-    list        List[]       
+model Cathegory {
+    id Int     @id @default(autoincrement())
+    name String
+    list List[]
 }
+

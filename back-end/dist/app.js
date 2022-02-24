@@ -13,18 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-//import { PrismaClient } from '@prisma/client'
-//import TodoService from './todoService'
-//const prisma = new PrismaClient()
+const todoService_1 = __importDefault(require("./service/todoService"));
 const app = (0, express_1.default)();
-const port = 3030;
-//const serviceList = new TodoService()
-//app.use(express.json())
-//app.use(express.urlencoded({extended: true}))
+const port = 3000;
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+const todoClient = new todoService_1.default();
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //let list = await serviceList.findAll()
-    //res.status(200).json(list)
-    res.send('Hello World!');
+    return res.status(200).json(yield todoClient.findAll());
 }));
 app.listen(port, () => {
     return console.log(`server is listening on ${port}`);
