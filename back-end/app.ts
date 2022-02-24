@@ -2,7 +2,7 @@ import express from 'express';
 import TodoService from './service/todoService';
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
