@@ -8,7 +8,11 @@ export default class TodoService {
         this.prismaClient= new PrismaClient()
     }
 
-    findAll =async():Promise<List[]>=> await this.prismaClient.list.findMany()
+    findAllByCategoryId =async(idcategory:number):Promise<List[]>=> await this.prismaClient.list.findMany({
+        where: {
+            cathegoryId: idcategory
+        }
+    })
 
     createList=async(list:List):Promise<List>=> await this.prismaClient.list.create({data:list})
 
@@ -16,12 +20,12 @@ export default class TodoService {
         return await this.prismaClient.cathegory.findMany()
     }
 
-    creatCathegory=()=>{
-        let cathegoryArray=["Legumes","Fruits","Viandes","Bonbons","Patisseries"]
-
-        cathegoryArray.map(async(item)=>{
-           let cath= {name:item} as Cathegory
-            await this.prismaClient.cathegory.create({data:cath})
-        })
+    creatCathegory=async(Cathegory:Cathegory)=>{
+        // let cathegoryArray=["Legumes","Fruits","Viandes","Bonbons","Patisseries"]
+        // cathegoryArray.map(async(item)=>{
+        //    let cath= {name:item} as Cathegory
+        //     await this.prismaClient.cathegory.create({data:cath})
+        // })
+        return await this.prismaClient.cathegory.create({data:Cathegory}) 
     }
 }

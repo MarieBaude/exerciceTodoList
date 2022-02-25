@@ -11,7 +11,7 @@ model List {
     id Int @id @default(autoincrement())
     name String
     cathegory Cathegory @relation(fields: [cathegoryId], references: [id])
-    cathegoryId Int @unique
+    cathegoryId Int 
 }
 
 model Cathegory {

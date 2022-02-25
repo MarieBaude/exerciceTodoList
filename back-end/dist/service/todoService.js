@@ -12,18 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 class TodoService {
     constructor() {
-        this.findAll = () => __awaiter(this, void 0, void 0, function* () { return yield this.prismaClient.list.findMany(); });
+        this.findAllByCategoryId = (idcategory) => __awaiter(this, void 0, void 0, function* () {
+            return yield this.prismaClient.list.findMany({
+                where: {
+                    cathegoryId: idcategory
+                }
+            });
+        });
         this.createList = (list) => __awaiter(this, void 0, void 0, function* () { return yield this.prismaClient.list.create({ data: list }); });
         this.getCathegories = () => __awaiter(this, void 0, void 0, function* () {
             return yield this.prismaClient.cathegory.findMany();
         });
-        this.creatCathegory = () => {
-            let cathegoryArray = ["Legumes", "Fruits", "Viandes", "Bonbons", "Patisseries"];
-            cathegoryArray.map((item) => __awaiter(this, void 0, void 0, function* () {
-                let cath = { name: item };
-                yield this.prismaClient.cathegory.create({ data: cath });
-            }));
-        };
+        this.creatCathegory = (Cathegory) => __awaiter(this, void 0, void 0, function* () {
+            // let cathegoryArray=["Legumes","Fruits","Viandes","Bonbons","Patisseries"]
+            // cathegoryArray.map(async(item)=>{
+            //    let cath= {name:item} as Cathegory
+            //     await this.prismaClient.cathegory.create({data:cath})
+            // })
+            return yield this.prismaClient.cathegory.create({ data: Cathegory });
+        });
         this.prismaClient = new client_1.PrismaClient();
     }
 }
