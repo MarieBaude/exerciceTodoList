@@ -6,6 +6,12 @@ interface Cathegory {
   name: string
 } 
 
+interface List {
+  id: number
+  name: string
+  cathegoryId: number
+}
+
 export default function App() {
   const [isloading, setisloading] = useState(true);
   const [categories, setcategories] = useState([]);
@@ -17,6 +23,9 @@ export default function App() {
     Axios.get("http://127.0.0.1:8080/" + e.currentTarget.value)
           .then(res => {
             console.log(res.data)
+            setisloading(true)
+            setlist(res.data)
+            setisloading(false)
           })
   }
 
@@ -44,10 +53,7 @@ export default function App() {
         <select onChange={getListByCategories}>
           <option>Select a category</option>
           {categories.map((item:Cathegory) => (
-            <option
-              key={item.id} 
-              value={item.id}
-            >
+            <option key={item.id} value={item.id}>
               {item.name}
             </option>
           ))}
@@ -61,8 +67,11 @@ export default function App() {
 
         <button>Add</button>
       </form>
+
       <div>
-        {/* ici se trouvera la liste */}
+        {list.map((item:List) => (
+          <h2 key={item.id}>{item.name}</h2>
+        ))}
       </div>
     </>
   );
