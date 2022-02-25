@@ -20,21 +20,31 @@ export default function App() {
 
   function getListByCategories(e:ChangeEvent<HTMLSelectElement>) {
     e.stopPropagation()
-    console.log(e.currentTarget.value)
     setSelectValue(e.currentTarget.value)
     Axios.get("http://127.0.0.1:8080/" + e.currentTarget.value)
           .then(res => {
-            console.log(res.data)
             setisloading(true)
             setlist(res.data)
             setisloading(false)
           })
   }
 
-  function createListElement(e:FormEvent<HTMLElement>) {
+  function createListElement(e:FormEvent<Element>) {
     e.preventDefault()
     e.stopPropagation()
-    console.log(e.target)
+    let form = e.target as Element
+    let input = form.childNodes[4] as HTMLInputElement
+    console.log(input.value)
+
+    const newListElement = {
+      name: input.value,
+      cathegoryId: selectValue
+    }
+
+    Axios.post("http://127.0.0.1:8080/", newListElement)
+          .then(res => {
+            console.log(res.data)
+          })
   }
 
 
@@ -68,14 +78,14 @@ export default function App() {
           ))}
         </select>
 
-        <button type='submit'>Add</button>
+        <button>Add Category</button>
         <button>Delete</button>
 
         <br />
         
         <input type="text" />
 
-        <button>Add</button>
+        <button type='submit'>Add List</button>
       </form>
 
       <div>
