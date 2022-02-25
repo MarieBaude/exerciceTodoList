@@ -14,8 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const todoService_1 = __importDefault(require("./service/todoService"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = 8080;
+app.use((0, cors_1.default)({
+    allowedHeaders: [
+        'Origin',
+        'X-Requested-With',
+        'Content-Type',
+        'Accept',
+        'X-Access-Token',
+    ],
+    origin: "*"
+}));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 const todoClient = new todoService_1.default();
@@ -23,16 +34,16 @@ app.post('/category', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     let newcategory = req.body;
     return res.status(200).json(yield todoClient.creatCathegory(newcategory));
 }));
-app.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/categories', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("requete dans la route /categories");
+    return res.status(200).json(yield todoClient.getCathegories());
+}));
+app.get('/categories/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json(yield todoClient.findAllByCategoryId(Number(req.params.id)));
 }));
 app.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let newlist = req.body;
     return res.status(201).json(yield todoClient.createList(newlist));
-}));
-app.get('/categories', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("requete dans la route /categories");
-    return res.status(200).json(yield todoClient.getCathegories());
 }));
 app.listen(port, () => {
     return console.log(`server is listening on ${port}`);

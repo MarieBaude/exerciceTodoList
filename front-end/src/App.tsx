@@ -8,7 +8,7 @@ export default function App() {
 
 
   useEffect(() => {
-    Axios.get("http://localhost:8080/categories")
+    Axios.get("http://127.0.0.1:8080/categories")
           .then(res => console.log(res.data)) 
   }, [categories.length]);
 

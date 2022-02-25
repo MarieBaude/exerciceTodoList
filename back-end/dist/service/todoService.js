@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 class TodoService {
     constructor() {
+        this.getCathegories = () => __awaiter(this, void 0, void 0, function* () {
+            return yield this.prismaClient.cathegory.findMany();
+        });
         this.findAllByCategoryId = (idcategory) => __awaiter(this, void 0, void 0, function* () {
             return yield this.prismaClient.list.findMany({
                 where: {
@@ -20,9 +23,6 @@ class TodoService {
             });
         });
         this.createList = (list) => __awaiter(this, void 0, void 0, function* () { return yield this.prismaClient.list.create({ data: list }); });
-        this.getCathegories = () => __awaiter(this, void 0, void 0, function* () {
-            return yield this.prismaClient.cathegory.findMany();
-        });
         this.creatCathegory = (Cathegory) => __awaiter(this, void 0, void 0, function* () {
             // let cathegoryArray=["Legumes","Fruits","Viandes","Bonbons","Patisseries"]
             // cathegoryArray.map(async(item)=>{
