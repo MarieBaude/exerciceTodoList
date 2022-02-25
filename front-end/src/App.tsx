@@ -10,7 +10,11 @@ export default function App() {
           <option>Select a category</option>
           <option>Test</option>
         </select>
+        <button>Add</button>
+        <button>Delete</button>
 
+        <br />
+        
         <input type="text" />
 
         <button>Add</button>

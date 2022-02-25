@@ -10,7 +10,6 @@ datasource db {
 model List {
     id Int @id @default(autoincrement())
     name String
-    description String
     cathegory Cathegory @relation(fields: [cathegoryId], references: [id])
     cathegoryId Int @unique
 }
