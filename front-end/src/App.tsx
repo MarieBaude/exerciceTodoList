@@ -21,12 +21,12 @@ export default function App() {
   function getListByCategories(e:ChangeEvent<HTMLSelectElement>) {
     e.stopPropagation()
     setSelectValue(e.currentTarget.value)
+    // setisloading(true)
     Axios.get("http://127.0.0.1:8080/" + e.currentTarget.value)
           .then(res => {
-            setisloading(true)
             setlist(res.data)
-            setisloading(false)
           })
+    //setisloading(false)
   }
 
   function createListElement(e:FormEvent<Element>) {
@@ -40,21 +40,29 @@ export default function App() {
       name: input.value,
       cathegoryId: Number(selectValue)
     }
-
+    
+    
     Axios.post("http://127.0.0.1:8080/", newListElement)
-          .then(res => {
-            console.log(res.data)
+    .then(res => {
+      if (res.data) {    
+              getAllCategories()
+              console.log(res.data)
+            }
           })
   }
 
-
-  useEffect(() => {
+  function getAllCategories () {
+    setisloading(true)
     Axios.get("http://127.0.0.1:8080/categories")
           .then(res => {
             setcategories(res.data)
             setisloading(false)
           }) 
-  }, [categories.length]);
+  }
+
+  useEffect(() => {
+    getAllCategories()
+  }, [list.length]);
 
 
   if (isloading) {
