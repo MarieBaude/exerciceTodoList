@@ -17,6 +17,8 @@ const todoService_1 = __importDefault(require("./service/todoService"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 const port = 8080;
+// cors est une sécuriter pour prot les requêtes malveillantes, 
+// pour ne pas accepter n'importe quelle requete
 app.use((0, cors_1.default)({
     allowedHeaders: [
         'Origin',

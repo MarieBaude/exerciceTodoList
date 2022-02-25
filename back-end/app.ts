@@ -7,6 +7,8 @@ import cors from 'cors';
 const app = express();
 const port = 8080;
 
+// cors est une sécuriter pour prot les requêtes malveillantes, 
+// pour ne pas accepter n'importe quelle requete
 app.use(cors({
     allowedHeaders: [
         'Origin',
@@ -17,6 +19,7 @@ app.use(cors({
     ],
     origin: "*"
 }))
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 

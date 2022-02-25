@@ -1,6 +1,10 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+interface Cathegory {
+  id: number
+  name: string
+} 
 
 export default function App() {
   const [isloading, setisloading] = useState(true);
@@ -9,7 +13,10 @@ export default function App() {
 
   useEffect(() => {
     Axios.get("http://127.0.0.1:8080/categories")
-          .then(res => console.log(res.data)) 
+          .then(res => {
+            setcategories(res.data)
+            setisloading(false)
+          }) 
   }, [categories.length]);
 
 
@@ -27,7 +34,9 @@ export default function App() {
       <form action="">
         <select>
           <option>Select a category</option>
-          <option>Test</option>
+          {categories.map((item:Cathegory) => (
+            <option key={item.id} value={item.id}>{item.name}</option>
+          ))}
         </select>
         <button>Add</button>
         <button>Delete</button>
