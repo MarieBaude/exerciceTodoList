@@ -48,6 +48,9 @@ app.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(newlist);
     return res.status(201).json(yield todoClient.createList(newlist));
 }));
+app.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return res.status(200).json(yield todoClient.deleteList(Number(req.params.id)));
+}));
 app.listen(port, () => {
     return console.log(`server is listening on ${port}`);
 });

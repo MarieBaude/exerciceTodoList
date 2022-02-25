@@ -31,6 +31,13 @@ class TodoService {
             // })
             return yield this.prismaClient.cathegory.create({ data: Cathegory });
         });
+        this.deleteList = (id) => __awaiter(this, void 0, void 0, function* () {
+            return yield this.prismaClient.list.delete({
+                where: {
+                    id: id
+                }
+            });
+        });
         this.prismaClient = new client_1.PrismaClient();
     }
 }

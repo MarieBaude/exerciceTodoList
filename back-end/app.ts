@@ -45,7 +45,9 @@ app.post('/',async(req:Request,res:Response)=>{
     return res.status(201).json(await todoClient.createList(newlist))
 })
 
-
+app.delete('/:id', async(req:Request, res:Response) => {
+    return res.status(200).json(await todoClient.deleteList(Number(req.params.id)))
+})
 
 app.listen(port, () => {
   return console.log(`server is listening on ${port}`);

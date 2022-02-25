@@ -30,4 +30,12 @@ export default class TodoService {
         // })
         return await this.prismaClient.cathegory.create({data:Cathegory}) 
     }
+
+    deleteList=async(id:number) => {
+        return await this.prismaClient.list.delete({
+            where: {
+                id: id
+            }
+        })
+    }
 }
