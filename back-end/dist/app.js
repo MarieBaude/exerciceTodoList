@@ -37,10 +37,10 @@ app.post('/category', (req, res) => __awaiter(void 0, void 0, void 0, function* 
     return res.status(200).json(yield todoClient.creatCathegory(newcategory));
 }));
 app.get('/categories', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("requete dans la route /categories");
     return res.status(200).json(yield todoClient.getCathegories());
 }));
-app.get('/categories/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("requete dans la route list");
     return res.status(200).json(yield todoClient.findAllByCategoryId(Number(req.params.id)));
 }));
 app.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {

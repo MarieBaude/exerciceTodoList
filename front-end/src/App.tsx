@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 interface Cathegory {
   id: number
@@ -9,7 +9,16 @@ interface Cathegory {
 export default function App() {
   const [isloading, setisloading] = useState(true);
   const [categories, setcategories] = useState([]);
+  const [list, setlist] = useState([]);
 
+  function getListByCategories(e:ChangeEvent<HTMLSelectElement>) {
+    e.preventDefault()
+    console.log(e.currentTarget.value)
+    Axios.get("http://127.0.0.1:8080/" + e.currentTarget.value)
+          .then(res => {
+            console.log(res.data)
+          })
+  }
 
   useEffect(() => {
     Axios.get("http://127.0.0.1:8080/categories")
@@ -32,10 +41,15 @@ export default function App() {
       <h1>Todo list</h1>
       
       <form action="">
-        <select>
+        <select onChange={getListByCategories}>
           <option>Select a category</option>
           {categories.map((item:Cathegory) => (
-            <option key={item.id} value={item.id}>{item.name}</option>
+            <option
+              key={item.id} 
+              value={item.id}
+            >
+              {item.name}
+            </option>
           ))}
         </select>
         <button>Add</button>
@@ -47,6 +61,9 @@ export default function App() {
 
         <button>Add</button>
       </form>
+      <div>
+        {/* ici se trouvera la liste */}
+      </div>
     </>
   );
 }

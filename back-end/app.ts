@@ -31,11 +31,11 @@ app.post('/category', async (req:Request, res:Response) => {
 })
 
 app.get('/categories',async(req:Request,res:Response)=>{
-    console.log("requete dans la route /categories")
     return res.status(200).json(await todoClient.getCathegories())
 })
 
-app.get('/categories/:id',async (req:Request,res:Response) => {
+app.get('/:id',async (req:Request,res:Response) => {
+    console.log("requete dans la route list")
     return res.status(200).json(await todoClient.findAllByCategoryId(Number(req.params.id)))
 });
 
