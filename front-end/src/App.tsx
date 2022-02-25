@@ -38,7 +38,7 @@ export default function App() {
 
     const newListElement = {
       name: input.value,
-      cathegoryId: selectValue
+      cathegoryId: Number(selectValue)
     }
 
     Axios.post("http://127.0.0.1:8080/", newListElement)

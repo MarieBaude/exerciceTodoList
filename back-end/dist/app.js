@@ -45,6 +45,7 @@ app.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let newlist = req.body;
+    console.log(newlist);
     return res.status(201).json(yield todoClient.createList(newlist));
 }));
 app.listen(port, () => {

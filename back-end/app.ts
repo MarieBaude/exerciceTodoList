@@ -41,6 +41,7 @@ app.get('/:id',async (req:Request,res:Response) => {
 
 app.post('/',async(req:Request,res:Response)=>{
     let newlist= req.body as List
+    console.log(newlist)
     return res.status(201).json(await todoClient.createList(newlist))
 })
 
