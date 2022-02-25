@@ -30,7 +30,8 @@ app.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let newlist = req.body;
     return res.status(201).json(yield todoClient.createList(newlist));
 }));
-app.get('/cathegories', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/categories', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("requete dans la route /categories");
     return res.status(200).json(yield todoClient.getCathegories());
 }));
 app.listen(port, () => {

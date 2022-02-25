@@ -25,7 +25,8 @@ app.post('/',async(req:Request,res:Response)=>{
     return res.status(201).json(await todoClient.createList(newlist))
 })
 
-app.get('/cathegories',async(req:Request,res:Response)=>{
+app.get('/categories',async(req:Request,res:Response)=>{
+    console.log("requete dans la route /categories")
     return res.status(200).json(await todoClient.getCathegories())
 })
 
