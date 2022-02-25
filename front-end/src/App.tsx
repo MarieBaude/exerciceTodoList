@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState, MouseEvent } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 
 interface Cathegory {
@@ -36,7 +36,7 @@ export default function App() {
           })
   }
 
-   function getAllCategories () {
+   function getAllCategories() {
     Axios.get("http://127.0.0.1:8080/categories")
           .then((res) => {
             setcategories(res.data)
@@ -58,14 +58,26 @@ export default function App() {
     
     
     Axios.post("http://127.0.0.1:8080/", newListElement)
-    .then(res => {
-      if (res.data) {    
+          .then(res => {
+            if (res.data) {    
+                    setisloading(true)
+                    axiosGetlist(categoryId)
+                  }
+                })
+  }
+
+  function deleteListElement(id:Number) {
+    console.log(id)
+    
+    Axios.delete("http://127.0.0.1:8080/" + id)
+          .then(res => {
+            console.log(res.data)
+            if (res.data) {
               setisloading(true)
               axiosGetlist(categoryId)
             }
           })
   }
-
   
 
   useEffect(() => {
@@ -108,7 +120,7 @@ export default function App() {
         {!isloading && list.map((item:List) => (
           <h2 key={item.id}>
             {item.name}
-            <AiFillDelete />
+            <AiFillDelete onClick={() => deleteListElement(item.id)}/>
           </h2>
         ))}
       </div>
