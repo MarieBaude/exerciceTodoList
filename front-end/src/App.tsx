@@ -17,16 +17,31 @@ export default function App() {
   const [categories, setcategories] = useState([]);
   const [list, setlist] = useState([]);
   const [selectValue, setSelectValue] = useState('');
+  const [categoryId,setCategoryId] = useState("")
 
   function getListByCategories(e:ChangeEvent<HTMLSelectElement>) {
     e.stopPropagation()
     setSelectValue(e.currentTarget.value)
-    // setisloading(true)
-    Axios.get("http://127.0.0.1:8080/" + e.currentTarget.value)
+    setisloading(true)
+    setCategoryId(e.currentTarget.value)
+    axiosGetlist(e.currentTarget.value)
+    
+  }
+
+  function axiosGetlist(id:string){
+    Axios.get("http://127.0.0.1:8080/" + id)
           .then(res => {
             setlist(res.data)
+            setisloading(false)
           })
-    //setisloading(false)
+  }
+
+   function getAllCategories () {
+    Axios.get("http://127.0.0.1:8080/categories")
+          .then((res) => {
+            setcategories(res.data)
+            setisloading(false)
+          }) 
   }
 
   function createListElement(e:FormEvent<Element>) {
@@ -45,24 +60,17 @@ export default function App() {
     Axios.post("http://127.0.0.1:8080/", newListElement)
     .then(res => {
       if (res.data) {    
-              getAllCategories()
-              console.log(res.data)
+              setisloading(true)
+              axiosGetlist(categoryId)
             }
           })
   }
 
-  function getAllCategories () {
-    setisloading(true)
-    Axios.get("http://127.0.0.1:8080/categories")
-          .then(res => {
-            setcategories(res.data)
-            setisloading(false)
-          }) 
-  }
+  
 
   useEffect(() => {
     getAllCategories()
-  }, [list.length]);
+  }, [list.length,categories.length]);
 
 
   if (isloading) {
@@ -97,7 +105,7 @@ export default function App() {
       </form>
 
       <div>
-        {list.map((item:List) => (
+        {!isloading && list.map((item:List) => (
           <h2 key={item.id}>{item.name}</h2>
         ))}
       </div>
