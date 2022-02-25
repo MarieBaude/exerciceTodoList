@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { AiFillDelete } from 'react-icons/ai';
 
 interface Cathegory {
   id: number
@@ -24,8 +25,7 @@ export default function App() {
     setSelectValue(e.currentTarget.value)
     setisloading(true)
     setCategoryId(e.currentTarget.value)
-    axiosGetlist(e.currentTarget.value)
-    
+    axiosGetlist(e.currentTarget.value) 
   }
 
   function axiosGetlist(id:string){
@@ -106,7 +106,10 @@ export default function App() {
 
       <div>
         {!isloading && list.map((item:List) => (
-          <h2 key={item.id}>{item.name}</h2>
+          <h2 key={item.id}>
+            {item.name}
+            <AiFillDelete />
+          </h2>
         ))}
       </div>
     </>
