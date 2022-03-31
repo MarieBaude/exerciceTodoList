@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { ChangeEvent, FormEvent, useEffect, useState, MouseEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 
 interface Cathegory {
@@ -89,9 +89,6 @@ export default function App() {
     return <h1>Chargement...</h1>
   }
 
-
-
-
   return (
     <>
       <h1>Todo list</h1>
@@ -106,8 +103,8 @@ export default function App() {
           ))}
         </select>
 
-        <button>Add Category</button>
-        <button>Delete</button>
+        {/* <button>Add Category</button>
+        <button>Delete</button> */}
 
         <br />
         

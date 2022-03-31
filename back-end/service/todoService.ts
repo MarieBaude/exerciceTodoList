@@ -20,8 +20,6 @@ export default class TodoService {
 
     createList=async(list:List):Promise<List>=> await this.prismaClient.list.create({data:list})
 
-    
-
     creatCathegory=async(Cathegory:Cathegory)=>{
         // let cathegoryArray=["Legumes","Fruits","Viandes","Bonbons","Patisseries"]
         // cathegoryArray.map(async(item)=>{
